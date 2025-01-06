@@ -17,8 +17,6 @@ Pré-requisitos
 Para garantir que todas as dependências sejam gerenciadas corretamente, é recomendado utilizar um ambiente virtual.
 
 Criando o Ambiente Virtual:
-Se você não tiver o Python instalado, baixe e instale a versão mais recente do Python: https://www.python.org/downloads/
-
 Para criar um ambiente virtual, abra o terminal e execute o seguinte comando:
 
 bash
