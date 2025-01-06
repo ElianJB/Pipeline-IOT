@@ -22,25 +22,25 @@ Se você não tiver o Python instalado, baixe e instale a versão mais recente d
 Para criar um ambiente virtual, abra o terminal e execute o seguinte comando:
 
 bash
-Copiar código
+
 python -m venv venv
 Após criar o ambiente virtual, ative-o:
 
 No Windows:
 
 bash
-Copiar código
+
 .\venv\Scripts\activate
 No macOS/Linux:
 
 bash
-Copiar código
+
 source venv/bin/activate
 2. Instalando Dependências
 Com o ambiente virtual ativado, instale as dependências necessárias para o projeto com o comando:
 
 bash
-Copiar código
+
 pip install -r requirements.txt
 O arquivo requirements.txt contém todas as bibliotecas necessárias para o funcionamento do projeto.
 
@@ -49,12 +49,12 @@ Rodando o PostgreSQL no Docker
 Você pode rodar o PostgreSQL usando o Docker. Para isso, execute o seguinte comando no terminal:
 
 bash
-Copiar código
+
 docker run --name postgres-iot -e POSTGRES_PASSWORD=6733 -p 5432:5432 -d postgres
 A conexão com o banco de dados será feita por meio da seguinte string de conexão:
 
 python
-Copiar código
+
 engine = create_engine('postgresql://postgres:6733@localhost:5432')
 4. Estrutura do Banco de Dados
 Este projeto utiliza a tabela temperature_readings que contém os seguintes campos:
@@ -72,7 +72,7 @@ Passos para Execução
 1. Carregar os Dados para o Banco de Dados
 O primeiro passo é carregar os dados do arquivo CSV (IOT-temp.csv) para o banco de dados PostgreSQL. O código utiliza a função create_or_replace_table para:
 
-Deletar a tabela data existente (se houver).
+
 Criar uma nova tabela a partir do arquivo CSV.
 2. Criação das Views no Banco de Dados
 As seguintes views SQL são criadas para análise dos dados:
@@ -81,7 +81,7 @@ As seguintes views SQL são criadas para análise dos dados:
 Essa view calcula a média de temperatura por dispositivo (ID), ignorando dispositivos com temperaturas inferiores a 20°C.
 
 sql
-Copiar código
+
 CREATE OR REPLACE VIEW avg_temp_por_dispositivo AS
 SELECT "room_id/id" as device_id, AVG(temp) as avg_temp
 FROM temperature_readings
@@ -90,7 +90,7 @@ GROUP BY "room_id/id";
 Essa view conta o número de leituras feitas por hora, ajudando a identificar picos de atividade ao longo do dia.
 
 sql
-Copiar código
+
 CREATE OR REPLACE VIEW leituras_por_hora AS
 SELECT EXTRACT(HOUR FROM TO_TIMESTAMP(noted_date, 'DD-MM-YYYY HH24:MI')) as hora, COUNT(*) as contagem
 FROM temperature_readings
@@ -99,7 +99,7 @@ GROUP BY hora;
 Essa view calcula as temperaturas máxima e mínima registradas por dia.
 
 sql
-Copiar código
+
 CREATE OR REPLACE VIEW temp_max_min_por_dia AS
 SELECT DATE(TO_TIMESTAMP(noted_date, 'DD-MM-YYYY HH24:MI')) as data, MAX(temp) as temp_max, MIN(temp) as temp_min
 FROM temperature_readings
@@ -108,7 +108,7 @@ GROUP BY data;
 Com tudo configurado, você pode rodar o dashboard com o seguinte comando:
 
 bash
-Copiar código
+
 streamlit run app.py
 Isso abrirá o dashboard no seu navegador, onde você poderá visualizar gráficos interativos de análise de temperatura.
 
