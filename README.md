@@ -26,16 +26,8 @@ bash
 python -m venv venv
 Após criar o ambiente virtual, ative-o:
 
-No Windows:
-
-bash
-
 .\venv\Scripts\activate
-No macOS/Linux:
 
-bash
-
-source venv/bin/activate
 2. Instalando Dependências
 Com o ambiente virtual ativado, instale as dependências necessárias para o projeto com o comando:
 
