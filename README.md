@@ -40,12 +40,12 @@ Você pode rodar o PostgreSQL usando o Docker. Para isso, execute o seguinte com
 
 bash
 
-docker run --name postgres-iot -e POSTGRES_PASSWORD=6733 -p 5432:5432 -d postgres
+docker run --name postgres-iot -e POSTGRES_PASSWORD=(suasenha)-p 5432:5432 -d postgres
 A conexão com o banco de dados será feita por meio da seguinte string de conexão:
 
 python
 
-engine = create_engine('postgresql://postgres:6733@localhost:5432')
+engine = create_engine('postgresql://postgres:(suasenha)@localhost:5432')
 4. Estrutura do Banco de Dados
 Este projeto utiliza a tabela temperature_readings que contém os seguintes campos:
 
@@ -99,7 +99,7 @@ Com tudo configurado, você pode rodar o dashboard com o seguinte comando:
 
 bash
 
-streamlit run app.py
+streamlit run dashboard.py
 Isso abrirá o dashboard no seu navegador, onde você poderá visualizar gráficos interativos de análise de temperatura.
 
 Capturas de Tela
